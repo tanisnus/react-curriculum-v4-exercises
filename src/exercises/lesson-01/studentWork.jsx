@@ -11,8 +11,7 @@ export default function StudentWork() {
       {/* add JSX here */}
       <h1> About Me</h1>
       <p>
-        {' '}
-        My name is {name}. My interestes include web design and web development.
+        My name is {name}. My interests include web design and web development.
         By the end of 2026, I want to create at least 3 fully functional
         websites that impact real users.
       </p>
