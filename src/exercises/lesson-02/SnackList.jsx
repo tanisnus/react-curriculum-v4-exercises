@@ -7,7 +7,7 @@ function SnackList() {
     { name: 'Pocky', rank: 1 },
   ];
 
-  const sortedSnackList = mySnackList.toSorted((a, b) => a.rank - b.rank);
+  const sortedSnackList = [...mySnackList].sort((a, b) => a.rank - b.rank);
 
   return (
     <div>

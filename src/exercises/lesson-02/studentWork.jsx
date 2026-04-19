@@ -7,7 +7,6 @@ import SnackApp from './SnackApp';
 export default function StudentWork() {
   return (
     <div>
-      {/* add JSX here */}
       <SnackApp />
     </div>
   );
