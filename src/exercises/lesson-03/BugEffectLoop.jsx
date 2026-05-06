@@ -14,11 +14,17 @@ export default function BugEffectLoop() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    setCount(count + 1);
-  });
+    setCount((prev) => prev + 1);
+  }, []);
 
   return <p>Bug 1 Count: {count}</p>;
 }
 
 // Explanation:
 // (Write your explanation here)
+
+// Issue: The useEffect is missing the dependency array, so it will run on every render.
+// Solution: Added useEffect's empty dependency array
+
+// Issue: Setter setCount is not updating the count variable correctly because it is using stale value
+// Solution: Added functional updating to update the most recent value of the count variable correctly.

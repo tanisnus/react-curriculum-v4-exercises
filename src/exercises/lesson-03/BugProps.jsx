@@ -12,11 +12,15 @@
   Use the commented "Explanation" section at the bottom of this lesson's components.
 */
 
+import { useState } from 'react';
+
 export default function BugProps({ name = 'friend' }) {
-  let message = 'Hello, ' + name;
+  // let message = 'Hello, ' + name;
+  const [message, setMessage] = useState('Hello, ' + name);
 
   function handleChange() {
-    message = 'Hi, ' + name + '!';
+    // message = 'Hi, ' + name + '!';
+    setMessage('Hi, ' + name + '!');
   }
 
   return (
@@ -29,3 +33,6 @@ export default function BugProps({ name = 'friend' }) {
 
 // Explanation:
 // (Write your explanation here)
+
+// Issue: The message variable is being mutated directly without using the setter function, preventing React to keep track of the value and update the UI when it changes.
+// Solution: Added useState to manage the message state and use the setter function to update the value.
