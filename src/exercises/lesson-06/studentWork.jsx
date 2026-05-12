@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import UserProfile from '../../components/UserProfile';
+import TaskFilter from '../../components/TaskFilter';
+import TaskItem from '../../components/TaskItem';
 
 export default function StudentWork() {
   const [tasks, setTasks] = useState([]);
@@ -35,22 +38,17 @@ export default function StudentWork() {
   return (
     <div>
       {/* #3: Hardcoded UI, not reusable */}
-      <h2>Welcome, Student</h2>
+      <UserProfile />
 
       {/* #4: Repeated button JSX */}
       <div>
-        <button onClick={() => setFilter('all')}>All</button>
-        <button onClick={() => setFilter('completed')}>Completed</button>
-        <button onClick={() => setFilter('pending')}>Pending</button>
-        <p>Current filter: {filter}</p>
+        <TaskFilter filter={filter} onFilterChange={setFilter} />
       </div>
 
       {/* #5: Inline list rendering */}
       <ul>
         {visibleTasks.map((task) => (
-          <li key={task.id}>
-            {task.title} {task.completed ? '✅' : '⏳'}
-          </li>
+          <TaskItem key={task.id} task={task} />
         ))}
       </ul>
     </div>
