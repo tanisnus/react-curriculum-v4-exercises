@@ -1,7 +1,7 @@
 //Lesson-08 Advanced Hooks: useCallback and useMemo, Optimizing a React App
 //Exercise: Book Library Dashboard Performance Optimization
 
-import { useState } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import { bookData, getAllGenres, filterBooksByGenre } from './bookData.js';
 import {
   useRenderCounter,
@@ -24,19 +24,19 @@ export default function StudentWork() {
 
   // TODO #1: Optimize this search handler with useCallback
   // This function is recreated on every render, causing BookCard re-renders
-  const handleSearch = (e) => {
+  const handleSearch = useCallback((e) => {
     setSearchTerm(e.target.value);
-  };
+  }, []);
 
   // TODO #2: Optimize this favorite toggle handler with useCallback
   // This function is recreated on every render, causing BookCard re-renders
-  const handleToggleFavorite = (bookId) => {
+  const handleToggleFavorite = useCallback((bookId) => {
     setFavorites((prev) =>
       prev.includes(bookId)
         ? prev.filter((id) => id !== bookId)
         : [...prev, bookId]
     );
-  };
+  }, []);
 
   const handleGenreToggle = (genre) => {
     setSelectedGenres((prev) =>
@@ -44,14 +44,16 @@ export default function StudentWork() {
     );
   };
 
-  // Filter books by search term and selected genres
-  let filteredBooks = bookData.filter(
-    (book) =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // Memoize so favoriting alone doesn't pass a new books array to children
+  const filteredBooks = useMemo(() => {
+    const bySearch = bookData.filter(
+      (book) =>
+        book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        book.author.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-  filteredBooks = filterBooksByGenre(filteredBooks, selectedGenres);
+    return filterBooksByGenre(bySearch, selectedGenres);
+  }, [searchTerm, selectedGenres]);
 
   return (
     <div className={styles.dashboard}>
