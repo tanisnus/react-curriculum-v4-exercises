@@ -184,6 +184,7 @@ export function surveyReducer(state, action) {
             const updatedOptions = q.options.filter(
               (_, index) => index !== action.payload.optionIndex
             );
+            // copying all a question's properties except options, then updating options with the new array
             return { ...q, options: updatedOptions };
           }
           return q;
