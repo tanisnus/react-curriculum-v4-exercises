@@ -145,8 +145,12 @@ export function QuestionItem({ question }) {
               value={workingText}
               onChange={(e) => setWorkingText(e.target.value)}
             />
-            <button onClick={handleSave}>Save</button>
-            <button onClick={handleEdit}>Cancel</button>
+            <button onClick={handleSave} className={styles['save-btn']}>
+              Save
+            </button>
+            <button onClick={handleEdit} className={styles['cancel-btn']}>
+              Cancel
+            </button>
           </>
         ) : (
           <h3>{question.question}</h3>
@@ -167,10 +171,16 @@ export function QuestionItem({ question }) {
                       value={optionDraft}
                       onChange={(e) => setOptionDraft(e.target.value)}
                     />
-                    <button onClick={() => handleSaveOption(index)}>
+                    <button
+                      onClick={() => handleSaveOption(index)}
+                      className={styles['save-btn']}
+                    >
                       Save
                     </button>
-                    <button onClick={() => setEditingOptionIndex(null)}>
+                    <button
+                      onClick={() => setEditingOptionIndex(null)}
+                      className={styles['cancel-btn']}
+                    >
                       Cancel
                     </button>
                   </div>
