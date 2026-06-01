@@ -163,8 +163,6 @@ export function QuestionItem({ question }) {
           <ul>
             {question.options.map((option, index) => (
               <li key={index} className={styles['option-item']}>
-                {/* <span className={styles['option-text']}>{option}</span>
-                <button onClick={handleEditOption(index)}>Edit</button> */}
                 {editingOptionIndex === index ? (
                   <div>
                     <input
