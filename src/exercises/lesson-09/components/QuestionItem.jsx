@@ -58,6 +58,17 @@ export function QuestionItem({ question }) {
   const handleDelete = () => {
     console.log('TODO: Implement delete functionality');
     // Hint: Show confirmation dialog, then use DELETE_QUESTION action
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this question?'
+    );
+    if (confirmed) {
+      dispatch({
+        type: 'DELETE_QUESTION',
+        payload: {
+          id: question.id,
+        },
+      });
+    }
   };
 
   // Note: These below functions are for multiple choice questions only
@@ -121,7 +132,7 @@ export function QuestionItem({ question }) {
             {isEditing ? 'Cancel' : 'Edit'}
           </button>
           <button className={styles['delete-btn']} onClick={handleDelete}>
-            Delete (TODO)
+            Delete
           </button>
         </div>
       </div>
@@ -166,18 +177,16 @@ export function QuestionItem({ question }) {
                 ) : (
                   <>
                     <span className={styles['option-text']}>{option}</span>
-
                     <button
                       onClick={() => handleEditOption(index)}
-                      className={styles['edit-btn']}
+                      className={styles['option-edit-btn']}
                     >
                       Edit
                     </button>
-
                     <button
                       onClick={() => handleDeleteOption(index)}
                       disabled={question.options.length <= 2}
-                      className={styles['delete-btn']}
+                      className={styles['option-delete-btn']}
                     >
                       Delete
                     </button>
