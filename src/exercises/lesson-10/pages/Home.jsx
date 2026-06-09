@@ -1,4 +1,6 @@
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
+
+const lessonBase = '/lessons/lesson-10';
 
 export default function Home({ products }) {
   return (
@@ -16,32 +18,34 @@ export default function Home({ products }) {
         }}
       >
         {products.map((p) => (
-          <article
-            key={p.id}
-            style={{
-              border: '1px solid #ddd',
-              borderRadius: 10,
-              padding: 10,
-              background: '#fff',
-            }}
-          >
-            <img
-              src={p.previewImage}
-              alt={p.name}
+          <Link to={`${lessonBase}/products/${p.id}`} key={p.id}>
+            <article
+              key={p.id}
               style={{
-                width: '100%',
-                height: 120,
-                objectFit: 'cover',
-                borderRadius: 8,
+                border: '1px solid #ddd',
+                borderRadius: 10,
+                padding: 10,
+                background: '#fff',
               }}
-            />
+            >
+              <img
+                src={p.previewImage}
+                alt={p.name}
+                style={{
+                  width: '100%',
+                  height: 120,
+                  objectFit: 'cover',
+                  borderRadius: 8,
+                }}
+              />
 
-            <h3 style={{ margin: '10px 0 4px' }}>{p.name}</h3>
+              <h3 style={{ margin: '10px 0 4px' }}>{p.name}</h3>
 
-            <p style={{ margin: 0 }}>
-              <strong>${p.price.toFixed(2)}</strong>
-            </p>
-          </article>
+              <p style={{ margin: 0 }}>
+                <strong>${p.price.toFixed(2)}</strong>
+              </p>
+            </article>
+          </Link>
         ))}
       </div>
     </section>
